@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import { FloatingButton } from "./Componenets/floatingButton.js/FloatingButton.js";
+import { AuthContext } from "./Context/Auth.js";
 
-function App() {
+import { InterviewQuestions } from "./Pages/InterviewQuestions.js";
+
+export const App = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <Routes>
+        <Route
+          exact
+          path="/InterviewQuestions"
+          element={<InterviewQuestions />}
+        />
+      </Routes>
+      <FloatingButton handleClick={handleClick} isOpen={isOpen} />
+    </AuthContext.Provider>
   );
-}
-
-export default App;
+};
