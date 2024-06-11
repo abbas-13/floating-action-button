@@ -3,13 +3,19 @@ import { MdOutlineAttachFile } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../Context/Auth";
 
-export const ReportIssue = () => {
-  const [issueDescription, setIssueDescription] = useState("");
+export const ReportIssue = ({ onFormSubmit }) => {
+  const [inputState, setInputState] = useState("");
+
   const fileInputRef = useRef(null);
   const { isLoggedIn } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
-    event.prevent.default();
+    event.preventDefault();
+    onFormSubmit();
+  };
+
+  const isFormValid = () => {
+    return inputState !== "";
   };
 
   const handleAttach = () => {
@@ -22,16 +28,16 @@ export const ReportIssue = () => {
 
   const location = useLocation();
 
-  const pageOptions = [
+  const sectionOptions = [
     { path: "/", name: "Home" },
     { path: "/InterviewQuestions", name: "Interview Questions" },
-    { path: "/Page2", name: "Page 2" },
+    { path: "/ConceptCards", name: "Concept Cards" },
     { path: "/Page3", name: "Page 3" },
   ];
 
   const currentPage =
-    pageOptions.find((page) => page.path === location.pathname) ||
-    pageOptions[0];
+    sectionOptions.find((section) => section.path === location.pathname) ||
+    sectionOptions[0];
 
   return (
     <form
@@ -52,7 +58,7 @@ export const ReportIssue = () => {
           name="issue-select"
           defaultValue={currentPage.name}
         >
-          {pageOptions.map((option) => (
+          {sectionOptions.map((option) => (
             <option key={option.path} value={option.name}>
               {option.name}
             </option>
@@ -67,8 +73,8 @@ export const ReportIssue = () => {
           <textarea
             rows={4}
             required
-            value={issueDescription}
-            onChange={(e) => setIssueDescription(e.target.value)}
+            value={inputState}
+            onChange={(e) => setInputState(e.target.value)}
             className="bg-gray-200 w-full rounded-lg p-2 resize-none"
           ></textarea>
           <div className="flex items-center mt-2">
@@ -91,20 +97,27 @@ export const ReportIssue = () => {
           </div>
         </div>
       </div>
-      {isLoggedIn && (
+      {!isLoggedIn && (
         <div className="w-full mt-4">
           <label className="text-neutral-600 text-lg font-['Poppins']">
             Enter your email to receive updates
           </label>
           <div className="relative mt-2">
-            <input className="w-full rounded-lg p-2 px-4 border bg-stone-50 border-gray-400 text-lg font-['Poppins']" />
+            <input
+              type="email"
+              placeholder="email id (optional)"
+              className="w-full rounded-lg p-2 px-4 border bg-stone-50 border-gray-400 text-lg font-['Poppins']"
+            />
           </div>
         </div>
       )}
       <div className="flex w-full justify-end">
         <button
-          onSubmit={handleSubmit}
-          className="bg-black text-white mt-2 font-['Poppins'] p-2 rounded-md w-2/6"
+          disabled={!isFormValid()}
+          type="submit"
+          className={`bg-black text-white mt-6 font-['Poppins'] p-2 rounded-md w-2/6 ${
+            !isFormValid() ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
           Submit
         </button>

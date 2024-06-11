@@ -1,37 +1,36 @@
-import { useContext, useRef, useState } from "react";
-import { MdOutlineAttachFile } from "react-icons/md";
-import { useLocation } from "react-router-dom";
+import { useContext, useState } from "react";
+
 import { AuthContext } from "../../Context/Auth";
 
 export const ContactUs = () => {
-  const [contactUsInput, setContactUsInput] = useState("");
-  const fileInputRef = useRef(null);
+  const [formInput, setFormInput] = useState({
+    name: "",
+    email: "",
+    textareaInput: "",
+    mobileNumber: "",
+  });
   const { isLoggedIn } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
-    event.prevent.default();
+    event.preventDefault();
   };
 
-  const handleAttach = () => {
-    fileInputRef.current.click();
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
-  const handleFileChange = (event) => {
-    const files = event.target.files;
+  const isFormValid = () => {
+    const { name, email, textareaInput } = formInput;
+
+    if (!isLoggedIn) {
+      return name !== "" && email !== "" && textareaInput !== "";
+    }
+    return textareaInput !== "";
   };
-
-  const location = useLocation();
-
-  const pageOptions = [
-    { path: "/", name: "Home" },
-    { path: "/InterviewQuestions", name: "Interview Questions" },
-    { path: "/Page2", name: "Page 2" },
-    { path: "/Page3", name: "Page 3" },
-  ];
-
-  const currentPage =
-    pageOptions.find((page) => page.path === location.pathname) ||
-    pageOptions[0];
 
   return (
     <form
@@ -44,13 +43,47 @@ export const ContactUs = () => {
       <div className="border border-gray-300 my-4 w-full"></div>
       <div className="w-full mb-4">
         <label className="text-neutral-600 text-lg font-['Poppins']">
-          Your name
+          Your name {!isLoggedIn && <span className="text-red-500"> *</span>}
         </label>
         <input
+          required
+          name="name"
           placeholder="Enter Your Name"
+          value={formInput.name}
+          onChange={handleInputChange}
           className="w-full rounded-lg p-1 mt-2 px-4 border bg-gray-200 bg-stone-50 border-gray-300 text-lg font-['Poppins']"
         />
       </div>
+      {!isLoggedIn && (
+        <div className="w-full mb-4">
+          <label className="text-neutral-600 text-lg font-['Poppins']">
+            Your Email {!isLoggedIn && <span className="text-red-500"> *</span>}
+          </label>
+          <input
+            required
+            name="email"
+            value={formInput.email}
+            onChange={handleInputChange}
+            placeholder="Enter Your Name"
+            className="w-full rounded-lg p-1 mt-2 px-4 border bg-gray-200 bg-stone-50 border-gray-300 text-lg font-['Poppins']"
+          />
+        </div>
+      )}
+      {!isLoggedIn && (
+        <div className="w-full mb-4">
+          <label className="text-neutral-600 text-lg font-['Poppins']">
+            Your Mobile Number
+          </label>
+          <input
+            name="mobileNumber"
+            value={formInput.mobileNumber}
+            onChange={handleInputChange}
+            placeholder="Enter Your Name"
+            className="w-full rounded-lg p-1 mt-2 px-4 border bg-gray-200 bg-stone-50 border-gray-300 text-lg font-['Poppins']"
+          />
+        </div>
+      )}
+
       <div className="w-full">
         <label className="text-neutral-600 text-lg font-['Poppins']">
           What would you like to ask?<span className="text-red-500"> *</span>
@@ -59,27 +92,22 @@ export const ContactUs = () => {
           <textarea
             rows={4}
             required
-            value={contactUsInput}
-            onChange={(e) => setContactUsInput(e.target.value)}
+            name="textareaInput"
+            value={formInput.textareaInput}
+            onChange={handleInputChange}
             className="bg-gray-200 w-full text-lg rounded-lg p-2 font-['Poppins'] resize-none"
             placeholder="Write here..."
           ></textarea>
         </div>
       </div>
-      {isLoggedIn && (
-        <div className="w-full mt-4">
-          <label className="text-neutral-600 text-lg font-['Poppins']">
-            Enter your email to receive updates
-          </label>
-          <div className="relative mt-2">
-            <input className="w-full rounded-lg p-2 px-4 border bg-stone-50 border-gray-400 text-lg font-['Poppins']" />
-          </div>
-        </div>
-      )}
       <div className="flex w-full justify-end">
         <button
+          type="submit"
           onSubmit={handleSubmit}
-          className="bg-black text-white mt-6 font-['Poppins'] p-2 rounded-md w-2/6"
+          disabled={!isFormValid()}
+          className={`bg-black text-white mt-6 font-['Poppins'] p-2 rounded-md w-2/6 ${
+            !isFormValid() ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
           Submit
         </button>
