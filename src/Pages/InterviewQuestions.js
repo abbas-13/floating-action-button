@@ -1,4 +1,5 @@
-import { FloatingButton } from "../Componenets/floatingButton.js/FloatingButton";
+import { FloatingButton } from "../Componenets/FloatingButton";
+import { MobileForm } from "../Componenets/mobileform";
 
 export const InterviewQuestions = () => {
   //send required items as props for the FloatingButton component
@@ -9,6 +10,7 @@ export const InterviewQuestions = () => {
           "Contact Us, Report an Issue, Share Feedback, Give Suggestion"
         }
       />
+      {/* <MobileForm /> */}
     </div>
   );
 };

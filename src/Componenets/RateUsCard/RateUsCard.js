@@ -8,14 +8,13 @@ export const RateUsCard = ({ onClose }) => {
   };
 
   const handleSubmit = () => {
-    // Submit rating logic
     onClose();
   };
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70">
       <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-        <h2 className="text-lg font-bold mb-4">Rate Us</h2>
+        <h2 className="text-sm font-bold mb-4">Rate Us</h2>
         <div className="flex justify-center mb-4">
           {[1, 2, 3, 4, 5].map((star) => (
             <span
@@ -32,7 +31,7 @@ export const RateUsCard = ({ onClose }) => {
         {rating > 0 && (
           <button
             onClick={handleSubmit}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-blue-500 text-sm text-white px-4 py-2 rounded"
           >
             Submit
           </button>

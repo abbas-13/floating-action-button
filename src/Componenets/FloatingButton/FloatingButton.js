@@ -34,8 +34,8 @@ export const FloatingButton = ({ enabledItems }) => {
   const FABitems = [
     {
       text: "Report an Issue",
-      icon: <img src={Issue} className="h-6" />,
-      iconClass: "w-12 h-auto p-3",
+      icon: <img src={Issue} className="h-4" />,
+      iconClass: "w-auto h-auto p-3",
       component: (
         <ReportIssue
           onFormSubmit={() => {
@@ -48,8 +48,8 @@ export const FloatingButton = ({ enabledItems }) => {
     },
     {
       text: "Share Feedback",
-      icon: <img src={Feedback} className="h-6" />,
-      iconClass: "w-12 h-auto p-3",
+      icon: <img src={Feedback} className="h-4" />,
+      iconClass: "w-auto h-auto p-3",
       component: (
         <FeedbackForm
           onFormSubmit={() => {
@@ -62,7 +62,7 @@ export const FloatingButton = ({ enabledItems }) => {
     },
     {
       text: "Give Suggestion",
-      icon: <img src={Suggestion} className="h-6" />,
+      icon: <img src={Suggestion} className="h-4" />,
       iconClass: "w-auto h-auto p-3",
       component: (
         <SuggestionForm
@@ -76,7 +76,7 @@ export const FloatingButton = ({ enabledItems }) => {
     },
     {
       text: "Contact Us",
-      icon: <img src={Contact} className="h-6" />,
+      icon: <img src={Contact} className="h-4 w-4" />,
       iconClass: "w-auto h-auto p-3",
       component: (
         <ContactUs
@@ -111,59 +111,70 @@ export const FloatingButton = ({ enabledItems }) => {
   };
 
   return (
-    <div
-      className={`fixed bottom-6 right-6 md:bottom-8 md:right-8 w-auto h-auto flex ${classFeatureClosed} justify-end items-end gap-8`}
-    >
+    <div>
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black md:hidden opacity-50 z-0"
+          onClick={() => {
+            setIsOpen(false);
+            setFeatureOpen(false);
+          }}
+        ></div>
+      )}
       <div
-        className={`flex ${classFeatureClosed} justify-center items-end gap-6`}
+        className={`fixed bottom-6 right-6 w-auto h-auto md:bottom-8 md:right-8 flex ${classFeatureClosed} justify-end items-end gap-3`}
       >
-        {isOpen &&
-          filteredItems.map((item, index) => (
-            <div
-              key={index}
-              className="flex justify-end items-center gap-4"
-              onClick={() => {
-                setFeatureOpen(true);
-                setFeatureName(item.text);
-              }}
-            >
-              {!featureOpen && (
-                <div className="px-4 py-2 bg-stone-50 rounded shadow border border-stone-300 flex justify-center items-center gap-2">
-                  <div className="text-center text-stone-950 text-lg font-medium font-poppins leading-none">
-                    {item.text}
-                  </div>
-                </div>
-              )}
+        <div
+          className={`flex ${classFeatureClosed} justify-center items-end gap-3`}
+        >
+          {isOpen &&
+            filteredItems.map((item, index) => (
               <div
-                className={`${item.iconClass} bg-stone-50 rounded-3xl shadow flex justify-center items-center`}
-                style={style}
+                key={index}
+                className="flex justify-end items-center gap-4"
+                onClick={() => {
+                  setFeatureOpen(true);
+                  setFeatureName(item.text);
+                }}
               >
-                {item.icon}
+                {!featureOpen && (
+                  <div className="px-4 py-2 bg-stone-50 rounded shadow border border-stone-300 flex justify-center items-center gap-2">
+                    <div className="text-center text-stone-950 text-sm font-medium font-poppins leading-none">
+                      {item.text}
+                    </div>
+                  </div>
+                )}
+                <div
+                  className={`${item.iconClass} bg-stone-50 rounded-3xl shadow flex justify-center items-center`}
+                  style={style}
+                >
+                  {item.icon}
+                </div>
               </div>
-            </div>
-          ))}
-      </div>
-      <div
-        className="w-12 h-12 bg-stone-50 p-3 rounded-3xl shadow flex justify-center items-center cursor-pointer"
-        style={style}
-        onClick={handleClick}
-      >
-        {isOpen ? (
-          <img className="h-5" src={Close} />
-        ) : (
-          <img className="h-6" src={FAB} />
+            ))}
+        </div>
+        <div
+          className="w-auto h-auto bg-stone-50 p-3 rounded-3xl shadow flex justify-center items-center cursor-pointer"
+          style={style}
+          onClick={handleClick}
+        >
+          {isOpen ? (
+            <img className="h-4" src={Close} />
+          ) : (
+            <img className="h-4" src={FAB} />
+          )}
+        </div>
+        {featureOpen && featureItem && (
+          <div className="fixed bottom-0 right-0 md:bottom-8 md:right-8 w-full md:w-auto md:h-auto">
+            {featureItem.component}
+          </div>
+        )}
+        {thanksMessage && (
+          <div className="fixed bottom-16 right-8 md:bottom-24 md:right-8 bg-white font-['Poppins'] text-black p-4 rounded shadow-lg">
+            {thanksMessage}
+          </div>
         )}
       </div>
-      {featureOpen && featureItem && (
-        <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8">
-          {featureItem.component}
-        </div>
-      )}
-      {thanksMessage && (
-        <div className="fixed bottom-16 right-8 md:bottom-24 md:right-8 bg-white font-['Poppins'] text-black p-4 rounded shadow-lg">
-          {thanksMessage}
-        </div>
-      )}
     </div>
   );
 };

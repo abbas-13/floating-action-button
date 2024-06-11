@@ -35,14 +35,14 @@ export const ContactUs = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-[26rem] h-auto fixed p-4 bottom-8 right-8 md:bottom-24 md:right-8 bg-stone-50 rounded-lg shadow flex flex-col items-center"
+      className="w-full md:w-80 h-auto fixed flex flex-col items-center p-4 bottom-0 md:bottom-24 md:right-8 bg-stone-50 rounded-t-3xl md:rounded-lg gap-4 md:gap-0 shadow"
     >
-      <label className="w-9/12 text-center text-neutral-600 text-lg font-semibold font-['Poppins']">
+      <label className="w-4/6 text-center text-neutral-600 text-xl md:text-lg font-semibold font-['Poppins']">
         Let us know what your Queries are!
       </label>
-      <div className="border border-gray-300 my-4 w-full"></div>
-      <div className="w-full mb-4">
-        <label className="text-neutral-600 text-lg font-['Poppins']">
+      <div className="border border-gray-300 md:my-4 w-full"></div>
+      <div className="w-full my-2">
+        <label className="text-neutral-600 text-xl md:text-sm font-['Poppins']">
           Your name {!isLoggedIn && <span className="text-red-500"> *</span>}
         </label>
         <input
@@ -51,12 +51,12 @@ export const ContactUs = () => {
           placeholder="Enter Your Name"
           value={formInput.name}
           onChange={handleInputChange}
-          className="w-full rounded-lg p-1 mt-2 px-4 border bg-gray-200 bg-stone-50 border-gray-300 text-lg font-['Poppins']"
+          className="w-full rounded-lg p-2 mt-2 md:mt-0 px-4 border bg-stone-50 border-gray-400 text-md md:text-xs font-['Poppins']"
         />
       </div>
       {!isLoggedIn && (
-        <div className="w-full mb-4">
-          <label className="text-neutral-600 text-lg font-['Poppins']">
+        <div className="w-full my-2">
+          <label className="text-neutral-600 text-xl md:text-sm font-['Poppins']">
             Your Email {!isLoggedIn && <span className="text-red-500"> *</span>}
           </label>
           <input
@@ -65,13 +65,13 @@ export const ContactUs = () => {
             value={formInput.email}
             onChange={handleInputChange}
             placeholder="Enter Your Name"
-            className="w-full rounded-lg p-1 mt-2 px-4 border bg-gray-200 bg-stone-50 border-gray-300 text-lg font-['Poppins']"
+            className="w-full rounded-lg p-2 mt-2 md:mt-0 px-4 border bg-stone-50 border-gray-400 text-md md:text-xs font-['Poppins']"
           />
         </div>
       )}
       {!isLoggedIn && (
-        <div className="w-full mb-4">
-          <label className="text-neutral-600 text-lg font-['Poppins']">
+        <div className="w-full my-2">
+          <label className="text-neutral-600 text-xl md:text-sm font-['Poppins']">
             Your Mobile Number
           </label>
           <input
@@ -79,13 +79,13 @@ export const ContactUs = () => {
             value={formInput.mobileNumber}
             onChange={handleInputChange}
             placeholder="Enter Your Name"
-            className="w-full rounded-lg p-1 mt-2 px-4 border bg-gray-200 bg-stone-50 border-gray-300 text-lg font-['Poppins']"
+            className="w-full rounded-lg p-2 px-4 mt-2 md:mt-0 border bg-stone-50 border-gray-400 text-md md:text-xs font-['Poppins']"
           />
         </div>
       )}
 
       <div className="w-full">
-        <label className="text-neutral-600 text-lg font-['Poppins']">
+        <label className="text-neutral-600 text-xl md:text-sm font-['Poppins']">
           What would you like to ask?<span className="text-red-500"> *</span>
         </label>
         <div className="bg-gray-200 border border-gray-300 rounded-lg h-auto mt-2">
@@ -95,7 +95,7 @@ export const ContactUs = () => {
             name="textareaInput"
             value={formInput.textareaInput}
             onChange={handleInputChange}
-            className="bg-gray-200 w-full text-lg rounded-lg p-2 font-['Poppins'] resize-none"
+            className="bg-gray-200 w-full h-48 md:h-auto text-md md:text-xs p-4 rounded-lg font-['Poppins'] resize-none"
             placeholder="Write here..."
           ></textarea>
         </div>
@@ -105,7 +105,7 @@ export const ContactUs = () => {
           type="submit"
           onSubmit={handleSubmit}
           disabled={!isFormValid()}
-          className={`bg-black text-white mt-6 font-['Poppins'] p-2 rounded-md w-2/6 ${
+          className={`bg-black font-semibold my-4 text-lg md:text-sm text-white font-['Poppins'] px-6 py-3 md:p-2 rounded-md md:w-2/6 ${
             !isFormValid() ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >

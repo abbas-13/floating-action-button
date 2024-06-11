@@ -1,33 +1,9 @@
-import { useContext, useRef, useState } from "react";
-import { MdOutlineAttachFile } from "react-icons/md";
-import { AuthContext } from "../../Context/Auth";
+import { useState } from "react";
 
-export const FeedbackForm = () => {
-  const [feedbackInput, setFeedbackInput] = useState("");
-  const fileInputRef = useRef(null);
-  const { isLoggedIn } = useContext(AuthContext);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
-  const isFormValid = () => {
-    return feedbackInput !== "";
-  };
-
-  const handleAttach = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleFileChange = (event) => {
-    const files = event.target.files;
-  };
-
+export const MobileForm = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-full md:w-80 h-auto fixed flex flex-col items-center p-4 bottom-0 md:bottom-24 md:right-8 bg-stone-50 rounded-t-3xl md:rounded-lg gap-4 md:gap-0 shadow"
-    >
+    <form className="w-full md:w-80 h-auto fixed p-4 bottom-0 md:bottom-24 md:right-8 bg-stone-50 rounded-t-3xl md:rounded-lg shadow flex flex-col gap-4 md:gap-0 items-center">
       <label className="w-4/6 text-center text-neutral-600 text-xl md:text-lg font-semibold font-['Poppins']">
         Let us know your Feedback about us!
       </label>
@@ -37,18 +13,14 @@ export const FeedbackForm = () => {
           <textarea
             rows={4}
             required
-            value={feedbackInput}
-            onChange={(e) => setFeedbackInput(e.target.value)}
             className="bg-gray-200 w-full h-48 md:h-auto text-md md:text-xs rounded-lg font-['Poppins'] resize-none"
             placeholder="Write here..."
           ></textarea>
-          <div className="flex items-center mt-2">
+          <div className="flex items-center  mt-2">
             <button
               type="button"
-              onClick={handleAttach}
               className="flex bg-gray-300 p-2 rounded-lg items-center"
             >
-              <MdOutlineAttachFile className="mr-2" />
               <span className="text-md md:text-sm font-['Poppins']">
                 Attach File
               </span>
@@ -57,9 +29,7 @@ export const FeedbackForm = () => {
               type="file"
               id="myfile"
               name="myfile"
-              ref={fileInputRef}
               style={{ display: "none" }}
-              onChange={handleFileChange}
             />
           </div>
         </div>
@@ -85,7 +55,7 @@ export const FeedbackForm = () => {
           <div className="relative mt-2">
             <input
               type="email"
-              placeholder="email id (optional)"
+              placeholder="Enter your email"
               className="w-full rounded-lg p-2 px-4 border bg-stone-50 border-gray-400 text-md md:text-xs font-['Poppins']"
             />
           </div>
@@ -93,12 +63,8 @@ export const FeedbackForm = () => {
       )}
       <div className="flex w-full justify-end">
         <button
-          disabled={!isFormValid()}
           type="submit"
-          onSubmit={handleSubmit}
-          className={`bg-black font-semibold my-4 text-lg md:text-sm text-white font-['Poppins'] px-6 py-3 md:p-2 rounded-md md:w-2/6 ${
-            !isFormValid() ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          className="bg-black text-lg my-4 md:text-sm font-semibold text-white font-['Poppins'] px-6 py-3 md:p-2 rounded-md md:w-2/6"
         >
           Submit
         </button>
