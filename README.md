@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Floating Action Button (FAB) Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project implements a Floating Action Button (FAB) with various functionalities like reporting issues, sharing feedback, giving suggestions, and contacting us.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Project Description
+The Floating Action Button (FAB) project provides a user-friendly way to interact with various forms. It allows users to report issues, share feedback, give suggestions, and contact the team.
 
-### `npm start`
+Installation
+To get started with the project, follow these steps:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Clone the repository:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+git clone https://github.com/your-repo/fab-project.git
+```
 
-### `npm test`
+Navigate to the project directory:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+cd fab-project
+```
 
-### `npm run build`
+Install dependencies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Usage
+To run the project locally, use the following command:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+npm start
+```
 
-### `npm run eject`
+This will start the development server and open the project in your default web browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Components
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+FloatingButton
+The FloatingButton component renders the FAB and handles its interactions. It displays a list of options based on the props passed to it.
 
-## Learn More
+Props:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+enabledItems: A comma-separated string of enabled FAB items.
+Example:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+<FloatingButton enabledItems="Report an Issue,Share Feedback,Give Suggestion,Contact Us" />
+```
 
-### Code Splitting
+ReportIssue
+The ReportIssue component renders a form that allows users to report issues they are facing.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+FeedbackForm
+The FeedbackForm component renders a form that allows users to share their feedback.
 
-### Analyzing the Bundle Size
+SuggestionForm
+The SuggestionForm component renders a form that allows users to give suggestions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+ContactUs
+The ContactUs component renders a form that allows users to contact the team.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Additional Features
 
-### Advanced Configuration
+Thanks Message
+When users submit their form, a pop-up appears above the FAB button showing a thank-you message. This message disappears after 5000ms.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Rate Us Card
+After completing a section, a rate-us card appears, prompting the user to rate the service. This card is centered on all devices with a background overlay.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
