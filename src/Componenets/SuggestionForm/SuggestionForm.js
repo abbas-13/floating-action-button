@@ -4,12 +4,16 @@ import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../Context/Auth";
 
 export const SuggestionForm = () => {
-  const [suggestionInput, setSuggestionInput] = useState("");
   const fileInputRef = useRef(null);
   const { isLoggedIn } = useContext(AuthContext);
+  const [suggestionInput, setSuggestionInput] = useState("");
 
   const handleSubmit = (event) => {
-    event.prevent.default();
+    event.preventDefault();
+  };
+
+  const isFormValid = () => {
+    return suggestionInput !== "";
   };
 
   const handleAttach = () => {
@@ -93,20 +97,28 @@ export const SuggestionForm = () => {
           </div>
         </div>
       </div>
-      {isLoggedIn && (
+      {!isLoggedIn && (
         <div className="w-full mt-4">
           <label className="text-neutral-600 text-lg font-['Poppins']">
             Enter your email to receive updates
           </label>
           <div className="relative mt-2">
-            <input className="w-full rounded-lg p-2 px-4 border bg-stone-50 border-gray-400 text-lg font-['Poppins']" />
+            <input
+              type="email"
+              placeholder="email id (optional)"
+              className="w-full rounded-lg p-2 px-4 border bg-stone-50 border-gray-400 text-lg font-['Poppins']"
+            />
           </div>
         </div>
       )}
       <div className="flex w-full justify-end">
         <button
+          disabled={!isFormValid()}
+          type="submit"
           onSubmit={handleSubmit}
-          className="bg-black text-white mt-2 font-['Poppins'] p-2 rounded-md w-2/6"
+          className={`bg-black text-white mt-6 font-['Poppins'] p-2 rounded-md w-2/6 ${
+            !isFormValid() ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
           Submit
         </button>

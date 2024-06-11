@@ -1,15 +1,14 @@
-import { ContactUs } from "../Componenets/ContactUs/ContactUs.js";
-import { FeedbackForm } from "../Componenets/FeedbackForm/FeedbackForm.js";
-import { ReportIssue } from "../Componenets/ReportIssue/ReportIssue.js";
-import { SuggestionForm } from "../Componenets/SuggestionForm/SuggestionForm.js";
+import { FloatingButton } from "../Componenets/floatingButton.js/FloatingButton";
 
 export const InterviewQuestions = () => {
+  //send required items as props for the FloatingButton component
   return (
     <div className="h-full w-full bg-gray-200">
-      {/* <ReportIssue /> */}
-      {/* <FeedbackForm /> */}
-      {/* <SuggestionForm /> */}
-      <ContactUs />
+      <FloatingButton
+        enabledItems={
+          "Contact Us, Report an Issue, Share Feedback, Give Suggestion"
+        }
+      />
     </div>
   );
 };
