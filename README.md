@@ -1,4 +1,4 @@
-# Floating Action Button (FAB) Project
+# Floating Action Button Project
 
 This project implements a Floating Action Button (FAB) with various functionalities like reporting issues, sharing feedback, giving suggestions, and contacting us.
 
